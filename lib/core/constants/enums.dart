@@ -1,0 +1,1 @@
+enum ReactionType { haha, love, like }
