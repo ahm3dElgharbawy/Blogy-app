@@ -9,7 +9,6 @@ import 'package:blog_app/features/layout/screens/app_layout.dart';
 import 'package:blog_app/init_providers.dart';
 import 'package:blog_app/localization/app_localizations.dart';
 import 'package:blog_app/localization/cubit/locale_cubit.dart';
-import 'package:blog_app/screens/my_inherited_widget.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,24 +42,21 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<LocaleCubit, LocaleState>(
           builder: (context, state) {
             if (state is ChangeLocaleState) {
-              return MyInheritedWidget(
-                counter: 10,
-                child: MaterialApp(
-                  title: "Blogy",
-                  debugShowCheckedModeBanner: false,
-                  locale: state.locale, // Default local
-                  supportedLocales: const [Locale('en'), Locale('ar')],
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate
-                  ],
-                  theme: AppThemes.light,
-                  navigatorKey: NavigationHelper.navigatorKey,
-                  builder: DevicePreview.appBuilder,
-                  home:  const AppLayoutScreen(),
-                ),
+              return MaterialApp(
+                title: "Blogy",
+                debugShowCheckedModeBanner: false,
+                locale: state.locale, // Default local
+                supportedLocales: const [Locale('en'), Locale('ar')],
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate
+                ],
+                theme: AppThemes.light,
+                navigatorKey: NavigationHelper.navigatorKey,
+                builder: DevicePreview.appBuilder,
+                home: const AppLayoutScreen(),
               );
             } else {
               return const SizedBox();
@@ -71,4 +67,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
